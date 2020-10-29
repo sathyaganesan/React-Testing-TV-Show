@@ -4,22 +4,6 @@ import userEvent from '@testing-library/user-event';
 import  mockFetchShow  from './api/fetchShow';
 import App from './App';
 
-jest.mock('./api/fetchShow');
-
-mockFetchShow.mockResolvedValue(appData);
-
-test("Testing App file", async() => {
-    render(<App />)
-
-    await waitFor(() => screen.getByText(/select a season/i));
-   
-    const selectDropDownMenu = screen.getByText(/select a season/i);
-    userEvent.click(selectDropDownMenu);
-
-    const seasonTwoOption = screen.getByText(/season 2/i);
-    userEvent.click(seasonTwoOption);    
-    
-});
 
 // Mock Data
 
@@ -623,5 +607,21 @@ const appData = { data: {
   }
   }
 
+  jest.mock('./api/fetchShow');
 
+  mockFetchShow.mockResolvedValue(appData);
+  
+  test("Testing App file", async() => {
+      render(<App />)
+  
+      await waitFor(() => screen.getByText(/select a season/i));
+     
+      const selectDropDownMenu = screen.getByText(/select a season/i);
+      userEvent.click(selectDropDownMenu);
+  
+      const seasonTwoOption = screen.getByText(/season 2/i);
+      userEvent.click(seasonTwoOption);    
+      
+  });
+  
             
